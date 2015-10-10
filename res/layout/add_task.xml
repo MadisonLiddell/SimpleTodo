@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:columnCount="2"
+    android:rowCount="6"
+    android:alignmentMode="alignBounds"
+    android:columnOrderPreserved="true"
+    android:rowOrderPreserved="true">
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/editTextTaskName"
+        android:inputType="text"
+        style="@android:style/TextAppearance.Material"
+        android:editable="true"
+        android:selectAllOnFocus="true"
+        android:textIsSelectable="true"
+        android:hint="@string/enter_task_hint"
+        android:maxLength="25"
+        android:textSize="22sp" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerTaskTypes"
+        android:spinnerMode="dropdown"
+        android:prompt="@string/spinner_task_type"
+        android:entries="@array/task_types"
+        android:layout_below="@+id/editTextTaskName"
+        style="@android:style/Theme.Material"
+        android:layout_toEndOf="@+id/textViewType"
+        android:layout_alignBottom="@+id/textViewType" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_datepicker"
+        android:id="@+id/buttonDatePicker"
+        android:onClick="showDatePickerDialog"
+        android:layout_below="@+id/spinnerTaskTypes"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="30dp"
+        style="@android:style/Theme.Material"/>
+
+    <Button
+        style="@android:style/Theme.Material"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_timepicker"
+        android:id="@+id/buttonTimePicker"
+        android:onClick="showTimePickerDialog"
+        android:layout_below="@+id/buttonDatePicker"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_add_task"
+        android:id="@+id/buttonSaveTask"
+        android:layout_gravity="center_horizontal"
+        android:layout_alignTop="@+id/buttonCancel"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        style="@android:style/Theme.Material"
+        android:textSize="20sp"
+        android:textColor="@color/positive" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_cancel"
+        android:id="@+id/buttonCancel"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="23dp"
+        android:layout_marginBottom="23dp"
+        style="@android:style/Theme.Material"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/textViewDate"
+        android:layout_alignBottom="@id/buttonDatePicker"
+        android:layout_toEndOf="@+id/buttonDatePicker"
+        style="@android:style/Theme.Material"
+        android:textSize="16sp"
+        android:layout_alignTop="@+id/buttonDatePicker"
+        android:freezesText="true"
+        android:gravity="center_vertical" />
+
+    <TextView
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/textViewTime"
+        android:layout_alignBottom="@+id/buttonTimePicker"
+        android:layout_toEndOf="@+id/buttonTimePicker"
+        style="@android:style/Theme.Material"
+        android:textIsSelectable="false"
+        android:textSize="16sp"
+        android:layout_alignTop="@+id/buttonTimePicker"
+        android:freezesText="true"
+        android:gravity="center_vertical" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/spinner_task_type"
+        android:id="@+id/textViewType"
+        android:layout_below="@+id/editTextTaskName"
+        android:layout_alignParentStart="true"
+        android:textStyle="bold"
+        android:textSize="20sp" />
+
+</RelativeLayout>

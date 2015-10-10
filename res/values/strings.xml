@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SimpleTodoList</string>
+    <string name="button_add_task">Add Task</string>
+    <string name="title_todo">To-Do List</string>
+    <string name="enter_task_hint">Task Name</string>
+    <string name="button_cancel">Cancel</string>
+    <string name="spinner_task_type">Type:</string>
+    <string name="button_datepicker">Set date deadline</string>
+    <string name="button_timepicker">Set time deadline</string>
+    <string name="label_task_name">Task</string>
+    <string name="label_task_type">Type</string>
+    <string name="label_date_time">Deadline</string>
+
+    <string-array name="task_types">
+        <item>Personal</item>
+        <item>Work</item>
+        <item>Study</item>
+        <item>Homework</item>
+    </string-array>
+</resources>

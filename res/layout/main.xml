@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+              android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:columnCount="3"
+    android:rowCount="3"
+    android:id="@+id/todoListLayout"
+    android:padding="5dp"
+    android:alignmentMode="alignBounds">
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView"
+        android:layout_row="1"
+        android:layout_column="0"
+        android:layout_columnSpan="3"
+        android:layout_columnWeight="1"
+        android:layout_rowSpan="1"
+        android:layout_rowWeight="1"
+        android:padding="5dp"
+        android:layout_gravity="fill_horizontal"
+        style="@android:style/Theme.Material.Panel"
+        android:fillViewport="true">
+
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="1"
+            style="@android:style/Theme.Material"
+            android:id="@+id/tableTasks">
+
+        </TableLayout>
+    </ScrollView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_task_type"
+        android:id="@+id/textViewTypeLabel"
+        style="@android:style/Theme.Material"
+        android:textSize="22sp"
+        android:layout_row="0"
+        android:layout_column="0"
+        android:layout_columnWeight="2"
+        android:layout_rowWeight="0"
+        android:layout_columnSpan="1"
+        android:layout_rowSpan="1"
+        android:layout_gravity="left"
+        android:background="@android:drawable/title_bar"
+        android:textStyle="bold"
+        android:elevation="22dp" />
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="@string/label_task_name"
+        android:id="@+id/textViewNameLabel"
+        style="@android:style/Theme.Material"
+        android:textSize="22sp"
+        android:layout_columnWeight="2"
+        android:layout_column="1"
+        android:layout_row="0"
+        android:layout_rowWeight="0"
+        android:layout_rowSpan="1"
+        android:layout_columnSpan="1"
+        android:layout_gravity="center_horizontal"
+        android:background="@android:drawable/title_bar"
+        android:textStyle="bold"
+        android:elevation="22dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_date_time"
+        android:id="@+id/textViewDeadlineLabel"
+        style="@android:style/Theme.Material"
+        android:textAlignment="center"
+        android:textSize="22sp"
+        android:layout_row="0"
+        android:layout_column="2"
+        android:layout_rowWeight="0"
+        android:layout_columnWeight="1"
+        android:layout_columnSpan="1"
+        android:layout_rowSpan="1"
+        android:layout_gravity="right"
+        android:background="@android:drawable/title_bar"
+        android:textStyle="bold"
+        android:elevation="22dp"
+        android:elegantTextHeight="false" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_add_task"
+        android:id="@+id/buttonNewTask"
+        android:layout_gravity="bottom|center_horizontal"
+        style="@android:style/Theme.Material"
+        android:textSize="20sp"
+        android:textColor="@color/positive"
+        android:layout_row="2"
+        android:layout_column="0"
+        android:layout_columnSpan="3"
+        android:layout_rowSpan="1"
+        android:layout_rowWeight="0"
+        android:layout_columnWeight="1"
+        android:elevation="40dp" />
+
+</GridLayout>
+
