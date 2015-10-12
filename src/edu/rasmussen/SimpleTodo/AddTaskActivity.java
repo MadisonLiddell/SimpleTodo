@@ -2,9 +2,7 @@ package edu.rasmussen.SimpleTodo;
 
 import android.app.Activity;
 import android.app.DialogFragment;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,33 +14,46 @@ import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
 /**
- * Created by Madison Liddell on 10/7/2015.
+ * @author Madison Liddell
+ * @since 2015-10-12
+ *
+ * Activity for adding a new task.
+ * Allows user to enter the task's name, type, and date + time deadline.
+ * Returns Task object
  */
 public class AddTaskActivity extends Activity implements DatePickerFragment.DialogListener,TimePickerFragment
         .DialogListener
 {
-    private GregorianCalendar calendar;
-    public static final String MyPREFERENCES = "MyPrefs" ;
-    public static final String NAME_KEY = "TASK_NAME";
-    public static final String TYPE_KEY ="SELECTED_TYPE";
-    SharedPreferences sharedpreferences;
-
-    EditText name;
-    Spinner type;
-    TextView date, time;
-    int typePosition;
+    private GregorianCalendar calendar;         // holds user's currently selected deadline time/date
+    // Keys for state saving
+    static final String STATE_NAME = "name";
+    static final String STATE_TYPE = "type";
+    static final String STATE_DATE = "date";
+    static final String STATE_TIME = "time";
+    static final String TASK = "task";          // task object id
+    // View object handles
+    private EditText name;
+    private Spinner type;
+    private TextView date, time;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_task);
 
-        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         calendar = new GregorianCalendar();
         name = (EditText) findViewById(R.id.editTextTaskName);
         type = (Spinner) findViewById(R.id.spinnerTaskTypes);
         date = (TextView) findViewById(R.id.textViewDate);
         time = (TextView) findViewById(R.id.textViewTime);
+        // Restore state
+        if (savedInstanceState != null)
+        {
+            name.setText(savedInstanceState.getString(STATE_NAME));
+            date.setText(savedInstanceState.getString(STATE_DATE));
+            time.setText(savedInstanceState.getString(STATE_TIME));
+            type.setSelection(savedInstanceState.getInt(STATE_TYPE));
+        }
 
         // Save button: send current task details to main activity and go back to main
         Button button1 =(Button)findViewById(R.id.buttonSaveTask);
@@ -52,8 +63,9 @@ public class AddTaskActivity extends Activity implements DatePickerFragment.Dial
                 Task task = saveTask();
 
                 Intent intent = new Intent(v.getContext(), MainActivity.class);
-                intent.putExtra("task", task);
+                intent.putExtra(TASK, task);
                 setResult(RESULT_OK, intent);
+                //savedInstanceState.clear();
                 finish();
             }
         });
@@ -63,7 +75,7 @@ public class AddTaskActivity extends Activity implements DatePickerFragment.Dial
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clearState();
+               // savedInstanceState.clear();
                 Intent intent = new Intent(v.getContext(), MainActivity.class);
                 setResult(RESULT_CANCELED, intent);
                 finish();
@@ -71,32 +83,15 @@ public class AddTaskActivity extends Activity implements DatePickerFragment.Dial
         });
     }
 
-    // Save all current entries
-    private void saveState()
+    // Save user entries
+    @Override
+    protected void onSaveInstanceState(Bundle savedInstanceState)
     {
-        SharedPreferences.Editor editor = sharedpreferences.edit();
-
-        editor.putString(NAME_KEY, name.getText().toString());
-        typePosition = type.getSelectedItemPosition();
-        editor.putInt(TYPE_KEY, typePosition);
-
-        editor.commit();
-    }
-
-    // Restore saved entries
-    private void restoreState()
-    {
-        name.setText(sharedpreferences.getString(NAME_KEY, null));
-        type.setSelection(sharedpreferences.getInt(TYPE_KEY, 0));
-    }
-
-    // Clear all entries from preferences
-    private void clearState()
-    {
-        SharedPreferences.Editor editor = sharedpreferences.edit();
-        editor.remove(NAME_KEY);
-        editor.remove(TYPE_KEY);
-        editor.commit();
+        savedInstanceState.putString(STATE_NAME, name.getText().toString());
+        savedInstanceState.putInt(STATE_TYPE, type.getSelectedItemPosition());
+        savedInstanceState.putString(STATE_DATE, date.getText().toString());
+        savedInstanceState.putString(STATE_TIME, time.getText().toString());
+        super.onSaveInstanceState(savedInstanceState);
     }
 
     // Shows calendar picker popup
@@ -115,10 +110,8 @@ public class AddTaskActivity extends Activity implements DatePickerFragment.Dial
     // Save task details, returns Task object
     private Task saveTask()
     {
-        Task task = new Task();
-        task.name = name.getText().toString();
-        task.type = type.getSelectedItem().toString();
-        task.deadline = calendar;
+        // Create new task object from user entered data
+        Task task = new Task(name.getText().toString(), type.getSelectedItem().toString(), calendar.getTimeInMillis());
 
         return task;
     }
@@ -142,23 +135,5 @@ public class AddTaskActivity extends Activity implements DatePickerFragment.Dial
         SimpleDateFormat sdf = new SimpleDateFormat("KK:mm a");
         sdf.setCalendar(calendar);
         time.setText(sdf.format(calendar.getTime()));
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        saveState();
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        restoreState();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        clearState();
     }
 }

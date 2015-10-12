@@ -9,7 +9,10 @@ import android.widget.DatePicker;
 import java.util.Calendar;
 
 /**
- * Created by Madison Liddell on 10/7/2015.
+ * @author Madison Liddell
+ * @since 2015-10-07
+ *
+ * Date picker popup dialog. Updates date text display in caller activity.
  */
 public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener
 {
