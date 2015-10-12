@@ -10,7 +10,10 @@ import android.widget.TimePicker;
 import java.util.Calendar;
 
 /**
- * Created by Madison Liddell on 10/7/2015.
+ * @author Madison Liddell
+ * @since 2015-10-07
+ *
+ * Time picker popup dialog. Updates time text display in caller activity
  */
 public class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener
 {
