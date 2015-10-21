@@ -16,10 +16,54 @@ import java.util.GregorianCalendar;
  */
 public class Task implements Parcelable
 {
-    public String name, type;
-    public Long date;                   // only used for passing date in parcel
-    public GregorianCalendar deadline;  // set to task deadline date and time
+    private int id;
+    private String name;
+    private String type;
+    private Long date;                   // only used for passing date in parcel
+    private GregorianCalendar deadline;  // set to task deadline date and time
     public static final String KEY_NAME ="name", KEY_TYPE = "type", KEY_DATE = "date";
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public Long getDate() {
+        return date;
+    }
+
+    public void setDate(Long date) {
+        this.date = date;
+    }
+
+    public GregorianCalendar getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(Long date) {
+        this.deadline = new GregorianCalendar();
+        this.deadline.setTimeInMillis(date);
+        setDate(date);
+    }
 
     // Constructor for a Task
     public Task(String name, String type, Long date)
@@ -31,11 +75,7 @@ public class Task implements Parcelable
         deadline.setTimeInMillis(date);     // set the deadline using date param
     }
 
-    // Empty constructor for array creation
-    public Task()
-    {
-
-    }
+    public Task() {}
 
     // Return formatted string using task's date
     public String getStringDate()

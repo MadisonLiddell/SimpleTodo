@@ -11,6 +11,7 @@
     <string name="label_task_name">Task</string>
     <string name="label_task_type">Type</string>
     <string name="label_date_time">Deadline</string>
+    <string name="todays_tasks">Today\'s Tasks</string>
 
     <string-array name="task_types">
         <item>Personal</item>

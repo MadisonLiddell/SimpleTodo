@@ -19,7 +19,7 @@ import java.util.GregorianCalendar;
  *
  * Activity for adding a new task.
  * Allows user to enter the task's name, type, and date + time deadline.
- * Returns Task object
+ * Returns the user's Task object
  */
 public class AddTaskActivity extends Activity implements DatePickerFragment.DialogListener,TimePickerFragment
         .DialogListener
@@ -107,7 +107,7 @@ public class AddTaskActivity extends Activity implements DatePickerFragment.Dial
         newFragment.show(getFragmentManager(), "timePickerDialog");
     }
 
-    // Save task details, returns Task object
+    // Save task details using current input, returns Task object
     private Task saveTask()
     {
         // Create new task object from user entered data
